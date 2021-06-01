@@ -13,6 +13,6 @@ function checkStringLength(string, maxLength) {
   return true;
 }
 
-console.log(checkStringLength('hello, world!', getRandomInRange(0, 140)));
+checkStringLength('hello, world!', getRandomInRange(0, 140));
 
 // this line was added to surpass the "unused variables" error
