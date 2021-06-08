@@ -88,4 +88,4 @@ const descriptions = [
   '#бегемот #гиппопотам',
 ];
 
-const photos = getPhotosAndComments(25, descriptions);
+getPhotosAndComments(25, descriptions);
