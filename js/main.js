@@ -29,7 +29,7 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
     'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
     'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-  ]
+  ];
   const possibleNames = [
     'Женя',
     'Саша',
@@ -39,7 +39,7 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
     'Арина',
     'Ян',
     'Лиза',
-  ]
+  ];
   for (var i = 0; i < amount; i++) {
     photosInFunction[i] = {
       id: i + 1,
@@ -49,7 +49,7 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
       comments: [],
     };
     for (var j = 0; j < getRandomInRange(3, 8); j++) {
-      photos[i].comments[j] = {
+      photosInFunction[i].comments[j] = {
         id: (i + 1) * 10 + j + 1,
         avatar: 'img/avatar-' + getRandomInRange(1, 6).toString() + '.svg',
         message: possibleComments[getRandomInRange(0, 5)],
