@@ -22,6 +22,24 @@ checkStringLength('hello, world!', getRandomInRange(0, 140));
 
 function getPhotosAndComments(amount, descriptionsInFunction) {
   const photosInFunction = [];
+  const possibleComments = [
+    'Всё отлично!',
+    'В целом всё неплохо. Но не всё.',
+    'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+    'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+    'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+    'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+  ]
+  const possibleNames = [
+    'Женя',
+    'Саша',
+    'Валя',
+    'Алекс',
+    'Диана',
+    'Арина',
+    'Ян',
+    'Лиза',
+  ]
   for (var i = 0; i < amount; i++) {
     photosInFunction[i] = {
       id: i + 1,
@@ -29,14 +47,14 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
       description: descriptionsInFunction[i],
       likes: getRandomInRange(15, 200),
       comments: [],
-    }
+    };
     for (var j = 0; j < getRandomInRange(3, 8); j++) {
       photos[i].comments[j] = {
         id: (i + 1) * 10 + j + 1,
         avatar: 'img/avatar-' + getRandomInRange(1, 6).toString() + '.svg',
         message: possibleComments[getRandomInRange(0, 5)],
         name: possibleNames[getRandomInRange(0, 7)],
-      }
+      };
     }
   }
   return photosInFunction;
@@ -68,26 +86,6 @@ const descriptions = [
   'Ух ты! Кто это у нас такой дружелюбный?',
   'Лучшая часть любого концерта - чувство единства с толпой #mychemicalromance #mcr',
   '#бегемот #гиппопотам',
-]
-
-const possibleComments = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-]
-
-const possibleNames = [
-  'Женя',
-  'Саша',
-  'Валя',
-  'Алекс',
-  'Диана',
-  'Арина',
-  'Ян',
-  'Лиза',
-]
+];
 
 const photos = getPhotosAndComments(25, descriptions);
