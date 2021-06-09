@@ -51,7 +51,7 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
     for (let counter2 = 0; counter2 < getRandomInRange(3, 8); counter2++) {
       photosInFunction[counter1].comments[counter2] = {
         id: (counter1 + 1) * 10 + counter2 + 1,
-        avatar: 'img/avatar-' + getRandomInRange(1, 6).toString() + '.svg',
+        avatar: `img/avatar-${getRandomInRange(1, 6)}.svg`,
         message: possibleComments[getRandomInRange(0, 5)],
         name: possibleNames[getRandomInRange(0, 7)],
       };
