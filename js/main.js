@@ -43,12 +43,12 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
   for (let counter1 = 0; counter1 < amount; counter1++) {
     photosInFunction[counter1] = {
       id: counter1 + 1,
-      url: 'photos/' + (counter1 + 1).toString() + '.jpg',
+      url: 'photos/${(counter1 + 1)}.jpg',
       description: descriptionsInFunction[counter1],
       likes: getRandomInRange(15, 200),
       comments: [],
     };
-    for (var counter2 = 0; counter2 < getRandomInRange(3, 8); counter2++) {
+    for (let counter2 = 0; counter2 < getRandomInRange(3, 8); counter2++) {
       photosInFunction[counter1].comments[counter2] = {
         id: (counter1 + 1) * 10 + counter2 + 1,
         avatar: 'img/avatar-' + getRandomInRange(1, 6).toString() + '.svg',
