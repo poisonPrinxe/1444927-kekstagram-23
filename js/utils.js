@@ -1,4 +1,4 @@
-function getRandomInRange(min, max) {
+﻿function getRandomInRange(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   if (min === max) {
