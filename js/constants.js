@@ -1,4 +1,6 @@
-﻿const DESCRIPTIONS = [
+﻿import {getRandomInRange} from './utils.js';
+
+const DESCRIPTIONS = [
   'С высоты птичьего полёта...',
   'Ещё пять минут пешком и мы на месте!',
   'Вода кристальна и хороша... #лето #отпуск #море',
