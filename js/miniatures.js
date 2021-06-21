@@ -1,13 +1,14 @@
 function putPicturesOnWebsite (pictures) {
   const IMAGE_TEMPLATE = document.querySelector('#picture');
-  const picturesOnWebsite = []
+  const picturesBlock = document.querySelector('.pictures');
+  const picturesOnWebsite = [];
   for (let counter = 0; counter < pictures.length; counter++) {
-    picturesOnWebsite[counter] = IMAGE_TEMPLATE.cloneNode(true);
-    console.log(picturesOnWebsite[counter].querySelector('.picture__img'));
-    console.log(picturesOnWebsite[counter].querySelector('.picture__comments'));
-    console.log(picturesOnWebsite[counter].querySelector('.picture__likes'));
+    picturesOnWebsite[counter] = IMAGE_TEMPLATE.content.cloneNode(true);
+    picturesOnWebsite[counter].querySelector('.picture__img').src = pictures[counter].url;
+    picturesOnWebsite[counter].querySelector('.picture__comments').textContent = pictures[counter].comments.length;
+    picturesOnWebsite[counter].querySelector('.picture__likes').textContent = pictures[counter].likes;
 
-    console.log(picturesOnWebsite[counter]);
+    picturesBlock.appendChild(picturesOnWebsite[counter]);
   }
 }
 
