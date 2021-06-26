@@ -26,7 +26,7 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
   const photosInFunction = [];
   for (let counter1 = 0; counter1 < amount; counter1++) {
     photosInFunction[counter1] = {
-      id: counter1 + 1,
+      ident: counter1 + 1,
       url: `./photos/${(counter1 + 1)}.jpg`,
       description: descriptionsInFunction[counter1],
       likes: getRandomInRange(15, 200),
