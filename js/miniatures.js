@@ -31,12 +31,12 @@ function putPicturesOnWebsite (pictures) {
         bigPicture.classList.add('hidden');
         document.body.classList.remove('modal-open');
       });
-      window.addEventListener("keydown", function (event) {
+      window.addEventListener('keydown', function (event) {
         if (event.defaultPrevented) {
           return;
         }
         switch (event.key) {
-          case "Escape":
+          case 'Escape':
             bigPicture.classList.add('hidden');
             document.body.classList.remove('modal-open');
             break;
