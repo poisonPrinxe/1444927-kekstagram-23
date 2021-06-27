@@ -10,7 +10,7 @@ function putPicturesOnWebsite (pictures) {
     picturesOnWebsite[counter].querySelector('.picture__img').alt = pictures[counter].description;
     picturesOnWebsite[counter].querySelector('.picture__comments').textContent = pictures[counter].comments.length;
     picturesOnWebsite[counter].querySelector('.picture__likes').textContent = pictures[counter].likes;
-    picturesOnWebsite[counter].querySelector('.picture').addEventListener('click', function () {
+    picturesOnWebsite[counter].querySelector('.picture').addEventListener('click', () => {
       const bigPicture = document.querySelector('.big-picture');
       bigPicture.querySelector('img').src = pictures[counter].url;
       bigPicture.querySelector('.likes-count').textContent = pictures[counter].likes;
@@ -27,11 +27,11 @@ function putPicturesOnWebsite (pictures) {
         bigPicture.querySelector('.social__comments').appendChild(comments[counterSecond]);
       }
       document.body.classList.add('modal-open');
-      bigPicture.querySelector('.cancel').addEventListener('click', function () {
+      bigPicture.querySelector('.cancel').addEventListener('click', () => {
         bigPicture.classList.add('hidden');
         document.body.classList.remove('modal-open');
       });
-      window.addEventListener('keydown', function (event) {
+      window.addEventListener('keydown', (event) => {
         if (event.defaultPrevented) {
           return;
         }
