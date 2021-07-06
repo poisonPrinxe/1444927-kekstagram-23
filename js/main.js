@@ -2,6 +2,7 @@
 import {getPhotosAndComments} from './data.js';
 import {DESCRIPTIONS} from './constants.js';
 import {putPicturesOnWebsite} from './miniatures.js';
+import './image-upload.js';
 
 checkStringLength('hello, world!', getRandomInRange(0, 140));
 
