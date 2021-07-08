@@ -3,7 +3,6 @@ const form = document.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 const descriptionInput = form.querySelector('.text__description');
 const hashtagsInput = form.querySelector('.text__hashtags');
-const HASHTAG_PATTERN = /^(#[a-z0-9]{1,19} ){0,4}(#[a-z0-9]{1,19})$/gmi;
 
 upload.addEventListener('change', () => {
   form.classList.remove('hidden');
