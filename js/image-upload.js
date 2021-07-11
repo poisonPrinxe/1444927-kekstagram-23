@@ -12,20 +12,23 @@ upload.addEventListener('change', () => {
 closeButton.addEventListener('click', () => {
   upload.value = '';
   form.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
 });
 
 window.addEventListener('keydown', (event) => {
-  if (event.defaultPrevented) {
-    return;
+  if (!form.classList.contains('hidden')) {
+    if (event.defaultPrevented) {
+      return;
+    }
+    switch (event.key) {
+      case 'Escape':
+        upload.value = '';
+        form.classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        break;
+    }
+    event.preventDefault();
   }
-  switch (event.key) {
-    case 'Escape':
-      form.classList.add('hidden');
-      document.body.classList.remove('modal-open');
-      break;
-  }
-  event.preventDefault();
 });
 
 descriptionInput.addEventListener('keydown', () => {
@@ -39,7 +42,7 @@ hashtagsInput.addEventListener('keydown', () => {
 hashtagsInput.addEventListener('change', () => {
   if (hashtagsInput.validity.patternMismatch) {
     hashtagsInput.setCustomValidity('Хештеги должны быть указаны в следующем формате:\n- От 0 до 5 хештегов\n- Каждый хештег начинается с #\n- Длина хештега от 2 до 20 символов, считая #\n- В тексте хештега могут быть только латинские буквы и цифры\n- Хештеги должны быть разделены пробелами');
-  } else {
+  } else if (hashtagsInput.validity.valid) {
     hashtagsInput.setCustomValidity('');
   }
 });

@@ -32,17 +32,19 @@ function putPicturesOnWebsite (pictures) {
         document.body.classList.remove('modal-open');
       });
       window.addEventListener('keydown', (event) => {
-        if (event.defaultPrevented) {
-          return;
+        if (!bigPicture.classList.contains('hidden')) {
+          if (event.defaultPrevented) {
+            return;
+          }
+          switch (event.key) {
+            case 'Escape':
+              bigPicture.classList.add('hidden');
+              document.body.classList.remove('modal-open');
+              break;
+          }
+          event.preventDefault();
         }
-        switch (event.key) {
-          case 'Escape':
-            bigPicture.classList.add('hidden');
-            document.body.classList.remove('modal-open');
-            break;
-        }
-        event.preventDefault();
-      }, true);
+      });
       bigPicture.classList.remove('hidden');
       bigPicture.querySelector('.social__comment-count').classList.add('hidden');
       bigPicture.querySelector('.comments-loader').classList.add('hidden');
