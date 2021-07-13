@@ -45,13 +45,13 @@ function putPicturesOnWebsite (pictures) {
         }
       }
 
-     loadComments();
-     commentGroupCurrent++;
+      loadComments();
+      commentGroupCurrent++;
 
-     bigPicture.querySelector('.comments-loader').addEventListener('click', () => {
-       loadComments();
-       commentGroupCurrent++;
-     });
+      bigPicture.querySelector('.comments-loader').addEventListener('click', () => {
+        loadComments();
+        commentGroupCurrent++;
+      });
 
       document.body.classList.add('modal-open');
 
