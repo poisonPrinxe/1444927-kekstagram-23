@@ -20,8 +20,6 @@ const POSSIBLE_NAMES = [
   'Лиза',
 ];
 
-const number = getRandomInRange(3, 8);
-
 function getPhotosAndComments(amount, descriptionsInFunction) {
   const photosInFunction = [];
   for (let counter1 = 0; counter1 < amount; counter1++) {
@@ -32,7 +30,7 @@ function getPhotosAndComments(amount, descriptionsInFunction) {
       likes: getRandomInRange(15, 200),
       comments: [],
     };
-    for (let counter2 = 0; counter2 < number; counter2++) {
+    for (let counter2 = 0; counter2 < getRandomInRange(3, 18); counter2++) {
       photosInFunction[counter1].comments[counter2] = {
         id: (counter1 + 1) * 10 + counter2 + 1,
         avatar: `img/avatar-${getRandomInRange(1, 6)}.svg`,
