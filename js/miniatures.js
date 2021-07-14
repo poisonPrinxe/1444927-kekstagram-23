@@ -31,6 +31,7 @@ function putPicturesOnWebsite (pictures) {
         commentGroups[counterCommentGroups] = pictures[counter].comments.slice(counterCommentGroups * 5, (counterCommentGroups + 1) * 5);
       }
       let commentGroupCurrent = 0;
+      let commentsNow = 0;
 
       function loadComments () {
         for (let counterSecond = 0; counterSecond < commentGroups[commentGroupCurrent].length; counterSecond++) {
@@ -43,15 +44,14 @@ function putPicturesOnWebsite (pictures) {
         if (commentGroupCurrent + 1 === commentGroups.length) {
           bigPicture.querySelector('.comments-loader').classList.add('hidden');
         }
+        commentsNow += commentGroups[commentGroupCurrent].length;
+        bigPicture.querySelector('.current-comments-count').textContent = commentsNow;
+        commentGroupCurrent++;
       }
 
       loadComments();
-      commentGroupCurrent++;
 
-      bigPicture.querySelector('.comments-loader').addEventListener('click', () => {
-        loadComments();
-        commentGroupCurrent++;
-      });
+      bigPicture.querySelector('.comments-loader').addEventListener('click', loadComments());
 
       document.body.classList.add('modal-open');
 
@@ -59,6 +59,7 @@ function putPicturesOnWebsite (pictures) {
         bigPicture.classList.add('hidden');
         document.body.classList.remove('modal-open');
         bigPicture.querySelector('.comments-loader').classList.remove('hidden');
+        bigPicture.querySelector('.comments-loader').removeEventListener('click', loadComments());
       });
 
       window.addEventListener('keydown', (event) => {
@@ -71,6 +72,7 @@ function putPicturesOnWebsite (pictures) {
               bigPicture.classList.add('hidden');
               document.body.classList.remove('modal-open');
               bigPicture.querySelector('.comments-loader').classList.remove('hidden');
+              bigPicture.querySelector('.comments-loader').removeEventListener('click', loadComments());
               break;
           }
           event.preventDefault();
