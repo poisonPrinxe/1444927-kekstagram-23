@@ -11,13 +11,15 @@ function putPicturesOnWebsite (pictures) {
     let currentPicture = picturesOnWebsite[counter];
 
     currentPicture = imageTemplate.content.cloneNode(true);
-    currentPicture.querySelector('.picture').id = counter;
-    currentPicture.querySelector('.picture__img').src = pictureBase.url;
-    currentPicture.querySelector('.picture__img').alt = pictureBase.description;
+    let currentPictureItself = currentPicture.querySelector('.picture');
+    let currentPictureImage = currentPicture.querySelector('.picture__img');
+    currentPictureItself.id = counter;
+    currentPictureImage.src = pictureBase.url;
+    currentPictureImage.alt = pictureBase.description;
     currentPicture.querySelector('.picture__comments').textContent = pictureBase.comments.length;
     currentPicture.querySelector('.picture__likes').textContent = pictureBase.likes;
 
-    currentPicture.querySelector('.picture').addEventListener('click', () => {
+    currentPictureItself.addEventListener('click', () => {
 
       const bigPicture = document.querySelector('.big-picture');
       const commentsLoader = bigPicture.querySelector('.comments-loader');
@@ -28,11 +30,12 @@ function putPicturesOnWebsite (pictures) {
       const commentTemplate = bigPicture.querySelector('.social__comment').cloneNode(true);
       const comments = [];
       bigPicture.querySelector('.social__comments').innerHTML = '';
-      const commentGroupsAmount = Math.ceil(pictureBase.comments.length / 5);
+      const COMMENTS_AT_A_TIME = 5;
+      const commentGroupsAmount = Math.ceil(pictureBase.comments.length / COMMENTS_AT_A_TIME);
       const commentGroups = [];
 
       for (let counterCommentGroups = 0; counterCommentGroups < commentGroupsAmount; counterCommentGroups++) {
-        commentGroups[counterCommentGroups] = pictureBase.comments.slice(counterCommentGroups * 5, (counterCommentGroups + 1) * 5);
+        commentGroups[counterCommentGroups] = pictureBase.comments.slice(counterCommentGroups * COMMENTS_AT_A_TIME, (counterCommentGroups + 1) * COMMENTS_AT_A_TIME);
       }
       let commentGroupCurrent = 0;
       let commentsNow = 0;
@@ -61,8 +64,9 @@ function putPicturesOnWebsite (pictures) {
       function closeBigPicture () {
         bigPicture.classList.add('hidden');
         document.body.classList.remove('modal-open');
-        bigPicture.querySelector('.comments-loader').classList.remove('hidden');
-        bigPicture.querySelector('.comments-loader').removeEventListener('click', loadComments);
+        commentsLoader.classList.remove('hidden');
+        commentsLoader.removeEventListener('click', loadComments);
+        bigPicture.querySelector('.cancel').removeEventListener('click', closeBigPicture);
       }
 
       bigPicture.querySelector('.cancel').addEventListener('click', closeBigPicture);
