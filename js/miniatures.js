@@ -11,8 +11,8 @@ function putPicturesOnWebsite (pictures) {
     let currentPicture = picturesOnWebsite[counter];
 
     currentPicture = imageTemplate.content.cloneNode(true);
-    let currentPictureItself = currentPicture.querySelector('.picture');
-    let currentPictureImage = currentPicture.querySelector('.picture__img');
+    const currentPictureItself = currentPicture.querySelector('.picture');
+    const currentPictureImage = currentPicture.querySelector('.picture__img');
     currentPictureItself.id = counter;
     currentPictureImage.src = pictureBase.url;
     currentPictureImage.alt = pictureBase.description;
