@@ -1,8 +1,93 @@
-﻿const upload = document.querySelector('#upload-file');
+﻿import './../nouislider/nouislider.js';
+
+const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
+const image = form.querySelector('.preview__image');
 const closeButton = form.querySelector('.img-upload__cancel');
 const descriptionInput = form.querySelector('.text__description');
 const hashtagsInput = form.querySelector('.text__hashtags');
+const scaleValue = form.querySelector('.scale__control--value');
+const scaleSmaller = form.querySelector('.scale__control--smaller');
+const scaleBigger = form.querySelector('.scale__control--bigger');
+const sliderElement = form.querySelector('.effect-level__slider');
+let currentEffect = 'none';
+const effects = form.querySelectorAll('.effects__radio');
+
+scaleSmaller.addEventListener('click', () => {
+  if (parseInt(scaleValue.value) > 25) {
+    scaleValue.value = (parseInt(scaleValue.value) - 25) + '%';
+    image.style.transform = `scale(${parseInt(scaleValue.value) / 100})`;
+  }
+});
+
+scaleBigger.addEventListener('click', () => {
+  if (parseInt(scaleValue.value) < 100) {
+    scaleValue.value = (parseInt(scaleValue.value) + 25) + '%';
+    image.style.transform = `scale(${parseInt(scaleValue.value) / 100})`;
+  }
+});
+
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 1,
+  },
+  start: 1,
+  step: 0.1,
+  connect: 'lower',
+});
+
+for (let counter = 0; counter < effects.length; counter++) {
+  effects[counter].addEventListener('click', () => {
+    currentEffect = effects[counter].value;
+    if (currentEffect = 'none') {
+      sliderElement.style.display = 'none';
+    } else {
+      sliderElement.style.display = 'block';
+    }
+    if (currentEffect = 'marvin') {
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: 0,
+          max: 100,
+        },
+        start: 100,
+        step: 1,
+      });
+    } else if (currentEffect = 'phobos') {
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: 0,
+          max: 3,
+        },
+        start: 3,
+        step: 0.1,
+      });
+    } else if (currentEffect = 'heat') {
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: 1,
+          max: 3,
+        },
+        start: 3,
+        step: 0.1,
+      });
+    } else if ((currentEffect = 'chrome')||(currentEffect = 'sepia')) {
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: 0,
+          max: 1,
+        },
+        start: 1,
+        step: 0.1,
+      });
+    }
+  });
+}
+
+sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
+  console.log(unencoded[handle]);
+});
 
 upload.addEventListener('change', () => {
   form.classList.remove('hidden');
