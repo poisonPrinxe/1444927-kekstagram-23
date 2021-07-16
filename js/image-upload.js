@@ -1,4 +1,4 @@
-﻿import './../nouislider/nouislider.js';
+﻿/* global noUiSlider:readonly */
 
 const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
@@ -37,15 +37,18 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
+sliderElement.style.display = 'none';
+
 for (let counter = 0; counter < effects.length; counter++) {
   effects[counter].addEventListener('click', () => {
     currentEffect = effects[counter].value;
-    if (currentEffect = 'none') {
+    if (currentEffect === 'none') {
       sliderElement.style.display = 'none';
+      image.style.filter = 'none';
     } else {
       sliderElement.style.display = 'block';
     }
-    if (currentEffect = 'marvin') {
+    if (currentEffect === 'marvin') {
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -54,7 +57,7 @@ for (let counter = 0; counter < effects.length; counter++) {
         start: 100,
         step: 1,
       });
-    } else if (currentEffect = 'phobos') {
+    } else if (currentEffect === 'phobos') {
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -63,7 +66,7 @@ for (let counter = 0; counter < effects.length; counter++) {
         start: 3,
         step: 0.1,
       });
-    } else if (currentEffect = 'heat') {
+    } else if (currentEffect === 'heat') {
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 1,
@@ -72,7 +75,7 @@ for (let counter = 0; counter < effects.length; counter++) {
         start: 3,
         step: 0.1,
       });
-    } else if ((currentEffect = 'chrome')||(currentEffect = 'sepia')) {
+    } else if ((currentEffect === 'chrome')||(currentEffect === 'sepia')) {
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -86,7 +89,17 @@ for (let counter = 0; counter < effects.length; counter++) {
 }
 
 sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
-  console.log(unencoded[handle]);
+  if (currentEffect === 'chrome') {
+    image.style.filter = `grayscale(${unencoded[handle]})`;
+  } else if (currentEffect === 'sepia') {
+    image.style.filter = `sepia(${unencoded[handle]})`;
+  } else if (currentEffect === 'marvin') {
+    image.style.filter = `invert(${unencoded[handle]}%)`;
+  } else if (currentEffect === 'phobos') {
+    image.style.filter = `blur(${unencoded[handle]}px)`;
+  } else if (currentEffect === 'heat') {
+    image.style.filter = `brightness(${unencoded[handle]})`;
+  }
 });
 
 upload.addEventListener('change', () => {
