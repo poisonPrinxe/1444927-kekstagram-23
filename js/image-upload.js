@@ -1,6 +1,6 @@
 ﻿const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
-const image = form.querySelector('.preview__image');
+const image = form.querySelector('.preview-image');
 const closeButton = form.querySelector('.img-upload__cancel');
 const descriptionInput = form.querySelector('.text__description');
 const hashtagsInput = form.querySelector('.text__hashtags');
@@ -48,6 +48,7 @@ for (let counter = 0; counter < effects.length; counter++) {
     if (currentEffect === 'none') {
       sliderElement.style.display = 'none';
       image.style.filter = 'none';
+      image.classList.add('effects__preview--none');
     } else {
       sliderElement.style.display = 'block';
     }
@@ -91,7 +92,7 @@ for (let counter = 0; counter < effects.length; counter++) {
   });
 }
 
-sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
+sliderElement.noUiSlider.on('update', (underscore, handle, unencoded) => {
   if (currentEffect === 'chrome') {
     image.style.filter = `grayscale(${unencoded[handle]})`;
   } else if (currentEffect === 'sepia') {
