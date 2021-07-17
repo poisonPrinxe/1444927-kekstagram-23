@@ -1,6 +1,4 @@
-﻿/* global noUiSlider:readonly */
-
-const upload = document.querySelector('#upload-file');
+﻿const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
 const image = form.querySelector('.preview__image');
 const closeButton = form.querySelector('.img-upload__cancel');
@@ -8,22 +6,27 @@ const descriptionInput = form.querySelector('.text__description');
 const hashtagsInput = form.querySelector('.text__hashtags');
 const scaleValue = form.querySelector('.scale__control--value');
 const scaleSmaller = form.querySelector('.scale__control--smaller');
+const SCALE_STEP = 25;
+const SCALE_MIN = 25;
+const SCALE_MAX = 100;
 const scaleBigger = form.querySelector('.scale__control--bigger');
 const sliderElement = form.querySelector('.effect-level__slider');
 let currentEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
 
 scaleSmaller.addEventListener('click', () => {
-  if (parseInt(scaleValue.value) > 25) {
-    scaleValue.value = (parseInt(scaleValue.value) - 25) + '%';
-    image.style.transform = `scale(${parseInt(scaleValue.value) / 100})`;
+  const valueNumber = parseInt(scaleValue.value, 10);
+  if (valueNumber > SCALE_MIN) {
+    scaleValue.value = `${valueNumber - SCALE_STEP}%`;
+    image.style.transform = `scale(${parseInt(scaleValue.value, 10) / SCALE_MAX})`;
   }
 });
 
 scaleBigger.addEventListener('click', () => {
-  if (parseInt(scaleValue.value) < 100) {
-    scaleValue.value = (parseInt(scaleValue.value) + 25) + '%';
-    image.style.transform = `scale(${parseInt(scaleValue.value) / 100})`;
+  const valueNumber = parseInt(scaleValue.value, 10);
+  if (valueNumber < SCALE_MAX) {
+    scaleValue.value = `${valueNumber + SCALE_STEP}%`;
+    image.style.transform = `scale(${parseInt(scaleValue.value, 10) / SCALE_MAX})`;
   }
 });
 
