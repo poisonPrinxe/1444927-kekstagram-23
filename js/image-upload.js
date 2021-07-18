@@ -12,6 +12,7 @@ const SCALE_MAX = 100;
 const scaleBigger = form.querySelector('.scale__control--bigger');
 const sliderElement = form.querySelector('.effect-level__slider');
 let currentEffect = 'none';
+let lastEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
 
 scaleSmaller.addEventListener('click', () => {
@@ -52,7 +53,28 @@ for (let counter = 0; counter < effects.length; counter++) {
     } else {
       sliderElement.style.display = 'block';
     }
-    if (currentEffect === 'marvin') {
+    if (currentEffect === 'chrome') {
+      image.classList.add('effects__preview--chrome');
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: 0,
+          max: 1,
+        },
+        start: 1,
+        step: 0.1,
+      });
+    } else if (currentEffect === 'sepia') {
+      image.classList.add('effects__preview--sepia');
+      sliderElement.noUiSlider.updateOptions({
+        range: {
+          min: 0,
+          max: 1,
+        },
+        start: 1,
+        step: 0.1,
+      });
+    } else if (currentEffect === 'marvin') {
+      image.classList.add('effects__preview--marvin');
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -62,6 +84,7 @@ for (let counter = 0; counter < effects.length; counter++) {
         step: 1,
       });
     } else if (currentEffect === 'phobos') {
+      image.classList.add('effects__preview--phobos');
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -71,6 +94,7 @@ for (let counter = 0; counter < effects.length; counter++) {
         step: 0.1,
       });
     } else if (currentEffect === 'heat') {
+      image.classList.add('effects__preview--heat');
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: 1,
@@ -79,30 +103,36 @@ for (let counter = 0; counter < effects.length; counter++) {
         start: 3,
         step: 0.1,
       });
-    } else if ((currentEffect === 'chrome')||(currentEffect === 'sepia')) {
-      sliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 1,
-        },
-        start: 1,
-        step: 0.1,
-      });
     }
+    if (lastEffect === 'none') {
+      image.classList.remove('effects__preview--none');
+    } else if (lastEffect === 'chrome') {
+      image.classList.remove('effects__preview--chrome');
+    } else if (lastEffect === 'sepia') {
+      image.classList.remove('effects__preview--sepia');
+    } else if (lastEffect === 'marvin') {
+      image.classList.remove('effects__preview--marvin');
+    } else if (lastEffect === 'phobos') {
+      image.classList.remove('effects__preview--phobos');
+    } else if (lastEffect === 'heat') {
+      image.classList.remove('effects__preview--heat');
+    }
+    lastEffect = currentEffect;
   });
 }
 
 sliderElement.noUiSlider.on('update', (underscore, handle, unencoded) => {
+  const effectLevel = unencoded[handle];
   if (currentEffect === 'chrome') {
-    image.style.filter = `grayscale(${unencoded[handle]})`;
+    image.style.filter = `grayscale(${effectLevel})`;
   } else if (currentEffect === 'sepia') {
-    image.style.filter = `sepia(${unencoded[handle]})`;
+    image.style.filter = `sepia(${effectLevel})`;
   } else if (currentEffect === 'marvin') {
-    image.style.filter = `invert(${unencoded[handle]}%)`;
+    image.style.filter = `invert(${effectLevel}%)`;
   } else if (currentEffect === 'phobos') {
-    image.style.filter = `blur(${unencoded[handle]}px)`;
+    image.style.filter = `blur(${effectLevel}px)`;
   } else if (currentEffect === 'heat') {
-    image.style.filter = `brightness(${unencoded[handle]})`;
+    image.style.filter = `brightness(${effectLevel})`;
   }
 });
 
@@ -113,6 +143,9 @@ upload.addEventListener('change', () => {
 
 closeButton.addEventListener('click', () => {
   upload.value = '';
+  effects[0].click();
+  image.style.transform = 'scale(1)';
+  scaleValue.value = `${SCALE_MAX}%`;
   form.classList.add('hidden');
   document.body.classList.remove('modal-open');
 });
@@ -125,6 +158,9 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
       case 'Escape':
         upload.value = '';
+        effects[0].click();
+        image.style.transform = 'scale(1)';
+        scaleValue.value = `${SCALE_MAX}%`;
         form.classList.add('hidden');
         document.body.classList.remove('modal-open');
         break;
