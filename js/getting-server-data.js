@@ -5,7 +5,7 @@ fetch('https://23.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     putPicturesOnWebsite(response);
   })
-  .catch((err) => {
+  .catch(() => {
     const errorMessage = document.querySelector('.error-message');
     errorMessage.classList.remove('hidden');
     const closeErrorMessage = errorMessage.querySelector('.error-message__hide');
