@@ -202,5 +202,5 @@ const submitForm = (onSuccess) => {
   });
 };
 
-submitForm(closeForm());
+submitForm(closeForm);
 
