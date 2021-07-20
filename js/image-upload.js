@@ -1,5 +1,6 @@
 ﻿const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
+const formItself = document.querySelector('.img-upload__form');
 const image = form.querySelector('.preview-image');
 const closeButton = form.querySelector('.img-upload__cancel');
 const descriptionInput = form.querySelector('.text__description');
@@ -186,7 +187,7 @@ hashtagsInput.addEventListener('change', () => {
 });
 
 const submitForm = (onSuccess) => {
-  form.addEventListener('submit', (evt) => {
+  formItself.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.target);
@@ -202,4 +203,5 @@ const submitForm = (onSuccess) => {
   });
 };
 
-submitForm(closeForm());
+submitForm(closeForm);
+
