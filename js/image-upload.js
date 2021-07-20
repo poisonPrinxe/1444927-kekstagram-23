@@ -198,7 +198,7 @@ const submitForm = (onSuccess) => {
         body: formData,
       },
     )
-    .then(() => onSuccess());
+      .then(() => onSuccess());
   });
 };
 
