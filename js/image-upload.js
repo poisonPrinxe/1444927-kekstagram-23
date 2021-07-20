@@ -186,7 +186,18 @@ hashtagsInput.addEventListener('change', () => {
 });
 
 const submitForm = (onSuccess) => {
-  submitButton.addEventListener('click', () => {
-    event.preventDefault();
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://23.javascript.pages.academy/kekstagram/data',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+    .then(() => onSuccess());
   });
-}
+};
