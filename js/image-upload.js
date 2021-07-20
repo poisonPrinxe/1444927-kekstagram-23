@@ -14,6 +14,7 @@ const sliderElement = form.querySelector('.effect-level__slider');
 let currentEffect = 'none';
 let lastEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
+const submitButton = form.querySelector('.img-upload__submit');
 
 scaleSmaller.addEventListener('click', () => {
   const valueNumber = parseInt(scaleValue.value, 10);
@@ -185,7 +186,7 @@ hashtagsInput.addEventListener('change', () => {
 });
 
 const submitForm = (onSuccess) => {
-  form.addEventListener('submit', () => {
+  submitButton.addEventListener('click', () => {
     event.preventDefault();
-  }
+  });
 }
