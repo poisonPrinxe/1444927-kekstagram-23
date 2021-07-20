@@ -201,3 +201,6 @@ const submitForm = (onSuccess) => {
     .then(() => onSuccess());
   });
 };
+
+submitForm(closeForm());
+
