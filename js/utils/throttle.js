@@ -16,9 +16,9 @@ function throttle (callback, delayBetweenFrames) {
     // вызываем наш колбэк и перезаписываем lastTime
     // временем "последнего кадра"
     if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest)
+      callback.apply(this, rest);
       lastTime = now;
-    };
+    }
   };
 }
 
