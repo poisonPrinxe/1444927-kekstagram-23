@@ -1,9 +1,9 @@
 function putPicturesOnWebsite (pictures) {
 
   const imageTemplate = document.querySelector('#picture');
-  const picturesBlock = document.querySelector('.pictures');
   const picturesOnWebsite = [];
   const fragment = document.createDocumentFragment();
+  const picturesBlock = document.querySelector('.pictures');
 
   for (let counter = 0; counter < pictures.length; counter++) {
 
@@ -97,4 +97,11 @@ function putPicturesOnWebsite (pictures) {
 
 }
 
-export {putPicturesOnWebsite};
+function removePicturesFromWebsite () {
+  const allPictures = document.querySelectorAll('.picture');
+  for (let counter = 0; counter < allPictures.length; counter++) {
+    allPictures[counter].parentNode.removeChild(allPictures[counter]);
+  }
+}
+
+export {putPicturesOnWebsite, removePicturesFromWebsite};
