@@ -4,8 +4,6 @@ import {picturesFromServer} from './getting-server-data.js';
 import {debounce} from './utils/debounce.js';
 
 const filtersList = document.querySelector('.img-filters');
-const filtersTitle = filtersList.querySelector('.img-filters__title');
-const filters = filtersList.querySelector('.img-filters__form');
 const filterDefault = filtersList.querySelector('#filter-default');
 const filterRandom = filtersList.querySelector('#filter-random');
 const filterDiscussed = filtersList.querySelector('#filter-discussed');
@@ -23,8 +21,8 @@ function showFilters () {
   }
 
   function getRandomPictures (pictures, amount) {
-    let newPictures = [];
-    let picturesCopy = pictures.slice();
+    const newPictures = [];
+    const picturesCopy = pictures.slice();
     let picturesAmount = pictures.length - 1;
     let numberOfPicture = 0;
     for (let counter = 0; counter < amount; counter++) {
@@ -37,7 +35,7 @@ function showFilters () {
   }
 
   function getDiscussedPictures (pictures) {
-    let picturesCopy = pictures.slice();
+    const picturesCopy = pictures.slice();
     picturesCopy.sort(compareDiscussed);
     return picturesCopy;
   }
@@ -49,19 +47,24 @@ function showFilters () {
     removePicturesFromWebsite();
   }
 
-  filterDefault.addEventListener('click', debounce(() => {
-    filterClick(filterDefault);
-    putPicturesOnWebsite(picturesFromServer);
-  }));
+  function allFiltersClicking () {
+    filterDefault.addEventListener('click', debounce(() => {
+      filterClick(filterDefault);
+      putPicturesOnWebsite(picturesFromServer);
+    }));
 
-  filterRandom.addEventListener('click', debounce(() => {
-    filterClick(filterRandom);
-    putPicturesOnWebsite(getRandomPictures(picturesFromServer, RANDOMS_AMOUNT));
-  }));
-  filterDiscussed.addEventListener('click', debounce(() => {
-    filterClick(filterDiscussed);
-    putPicturesOnWebsite(getDiscussedPictures(picturesFromServer));
-  }));
+    filterRandom.addEventListener('click', debounce(() => {
+      filterClick(filterRandom);
+      putPicturesOnWebsite(getRandomPictures(picturesFromServer, RANDOMS_AMOUNT));
+    }));
+
+    filterDiscussed.addEventListener('click', debounce(() => {
+      filterClick(filterDiscussed);
+      putPicturesOnWebsite(getDiscussedPictures(picturesFromServer));
+    }));
+  }
+
+  allFiltersClicking();
 }
 
 export {showFilters};
