@@ -73,7 +73,7 @@ function putPicturesOnWebsite (pictures) {
 
       window.addEventListener('keydown', (evt) => {
         if (!bigPicture.classList.contains('hidden')) {
-          if (event.defaultPrevented) {
+          if (evt.defaultPrevented) {
             return;
           }
           switch (evt.key) {
