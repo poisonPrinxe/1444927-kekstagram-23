@@ -24,9 +24,9 @@ errorClose.addEventListener('click', () => {
 
 document.body.appendChild(errorItself);
 
-window.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', (evt) => {
   if (!successItself.classList.contains('hidden')) {
-    if (event.defaultPrevented) {
+    if (evt.defaultPrevented) {
       return;
     }
     switch (event.key) {
@@ -34,9 +34,9 @@ window.addEventListener('keydown', (event) => {
         successItself.classList.add('hidden');
         break;
     }
-    event.preventDefault();
+    evt.preventDefault();
   } else if (!errorItself.classList.contains('hidden')) {
-    if (event.defaultPrevented) {
+    if (evt.defaultPrevented) {
       return;
     }
     switch (event.key) {
@@ -44,7 +44,7 @@ window.addEventListener('keydown', (event) => {
         errorItself.classList.add('hidden');
         break;
     }
-    event.preventDefault();
+    evt.preventDefault();
   }
 });
 
