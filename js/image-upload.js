@@ -154,26 +154,26 @@ closeButton.addEventListener('click', () => {
   closeForm();
 });
 
-window.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', (evt) => {
   if (!form.classList.contains('hidden')) {
-    if (event.defaultPrevented) {
+    if (evt.defaultPrevented) {
       return;
     }
-    switch (event.key) {
+    switch (evt.key) {
       case 'Escape':
         closeForm();
         break;
     }
-    event.preventDefault();
+    evt.preventDefault();
   }
 });
 
-descriptionInput.addEventListener('keydown', () => {
-  event.stopPropagation();
+descriptionInput.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
 });
 
-hashtagsInput.addEventListener('keydown', () => {
-  event.stopPropagation();
+hashtagsInput.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
 });
 
 hashtagsInput.addEventListener('change', () => {
