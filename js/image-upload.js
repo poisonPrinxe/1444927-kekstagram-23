@@ -1,6 +1,5 @@
 ﻿const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
-const formItself = document.querySelector('.img-upload__form');
 const image = form.querySelector('.preview-image');
 const closeButton = form.querySelector('.img-upload__cancel');
 const descriptionInput = form.querySelector('.text__description');
@@ -185,22 +184,4 @@ hashtagsInput.addEventListener('change', () => {
   }
 });
 
-const submitForm = (onSuccess) => {
-  formItself.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://23.javascript.pages.academy/kekstagram',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-      .then(() => onSuccess());
-  });
-};
-
-submitForm(closeForm);
-
+export {closeForm};
