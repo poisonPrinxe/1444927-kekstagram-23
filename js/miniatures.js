@@ -71,17 +71,17 @@ function putPicturesOnWebsite (pictures) {
 
       bigPicture.querySelector('.cancel').addEventListener('click', closeBigPicture);
 
-      window.addEventListener('keydown', (event) => {
+      window.addEventListener('keydown', (evt) => {
         if (!bigPicture.classList.contains('hidden')) {
           if (event.defaultPrevented) {
             return;
           }
-          switch (event.key) {
+          switch (evt.key) {
             case 'Escape':
               closeBigPicture();
               break;
           }
-          event.preventDefault();
+          evt.preventDefault();
         }
       });
 
