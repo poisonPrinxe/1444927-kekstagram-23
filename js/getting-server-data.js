@@ -1,8 +1,11 @@
 import {putPicturesOnWebsite} from './miniatures.js';
 
+let picturesFromServer = [];
+
 fetch('https://23.javascript.pages.academy/kekstagram/data')
   .then((response) => response.json())
   .then((response) => {
+    picturesFromServer = response;
     putPicturesOnWebsite(response);
   })
   .catch(() => {
@@ -13,3 +16,5 @@ fetch('https://23.javascript.pages.academy/kekstagram/data')
       errorMessage.classList.add('hidden');
     });
   });
+
+export {picturesFromServer};
