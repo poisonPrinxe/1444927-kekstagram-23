@@ -29,7 +29,7 @@ window.addEventListener('keydown', (evt) => {
     if (evt.defaultPrevented) {
       return;
     }
-    switch (event.key) {
+    switch (evt.key) {
       case 'Escape':
         successItself.classList.add('hidden');
         break;
@@ -39,7 +39,7 @@ window.addEventListener('keydown', (evt) => {
     if (evt.defaultPrevented) {
       return;
     }
-    switch (event.key) {
+    switch (evt.key) {
       case 'Escape':
         errorItself.classList.add('hidden');
         break;
