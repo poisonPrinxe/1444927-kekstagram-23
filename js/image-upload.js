@@ -141,13 +141,17 @@ upload.addEventListener('change', () => {
   document.body.classList.add('modal-open');
 });
 
-closeButton.addEventListener('click', () => {
+function closeForm () {
   upload.value = '';
   effects[0].click();
   image.style.transform = 'scale(1)';
   scaleValue.value = `${SCALE_MAX}%`;
   form.classList.add('hidden');
   document.body.classList.remove('modal-open');
+}
+
+closeButton.addEventListener('click', () => {
+  closeForm();
 });
 
 window.addEventListener('keydown', (event) => {
@@ -157,12 +161,7 @@ window.addEventListener('keydown', (event) => {
     }
     switch (event.key) {
       case 'Escape':
-        upload.value = '';
-        effects[0].click();
-        image.style.transform = 'scale(1)';
-        scaleValue.value = `${SCALE_MAX}%`;
-        form.classList.add('hidden');
-        document.body.classList.remove('modal-open');
+        closeForm();
         break;
     }
     event.preventDefault();
@@ -184,3 +183,5 @@ hashtagsInput.addEventListener('change', () => {
     hashtagsInput.setCustomValidity('');
   }
 });
+
+export {closeForm};
