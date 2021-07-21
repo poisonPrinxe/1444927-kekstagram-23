@@ -24,6 +24,30 @@ errorClose.addEventListener('click', () => {
 
 document.body.appendChild(errorItself);
 
+window.addEventListener('keydown', (event) => {
+  if (!successItself.classList.contains('hidden')) {
+    if (event.defaultPrevented) {
+      return;
+    }
+    switch (event.key) {
+      case 'Escape':
+        successItself.classList.add('hidden');
+        break;
+    }
+    event.preventDefault();
+  } else if (!errorItself.classList.contains('hidden')) {
+    if (event.defaultPrevented) {
+      return;
+    }
+    switch (event.key) {
+      case 'Escape':
+        errorItself.classList.add('hidden');
+        break;
+    }
+    event.preventDefault();
+  }
+});
+
 const submitForm = (onSuccess) => {
   formItself.addEventListener('submit', (evt) => {
     evt.preventDefault();
