@@ -1,4 +1,3 @@
-﻿import {getRandomInRange} from './utils.js';
 import './image-upload.js';
 import {closeForm} from './image-upload.js';
 import './getting-server-data.js';
