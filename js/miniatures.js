@@ -1,9 +1,15 @@
-function putPicturesOnWebsite (pictures) {
+const imageTemplate = document.querySelector('#picture');
+const picturesOnWebsite = [];
+const fragment = document.createDocumentFragment();
+const picturesBlock = document.querySelector('.pictures');
+const bigPicture = document.querySelector('.big-picture');
+const commentsLoader = bigPicture.querySelector('.comments-loader');
+const comments = [];
+const COMMENTS_AT_A_TIME = 5;
+const commentGroups = [];
+const commentTemplate = bigPicture.querySelector('.social__comment').cloneNode(true);
 
-  const imageTemplate = document.querySelector('#picture');
-  const picturesOnWebsite = [];
-  const fragment = document.createDocumentFragment();
-  const picturesBlock = document.querySelector('.pictures');
+function putPicturesOnWebsite (pictures) {
 
   for (let counter = 0; counter < pictures.length; counter++) {
 
@@ -21,18 +27,12 @@ function putPicturesOnWebsite (pictures) {
 
     currentPictureItself.addEventListener('click', () => {
 
-      const bigPicture = document.querySelector('.big-picture');
-      const commentsLoader = bigPicture.querySelector('.comments-loader');
       bigPicture.querySelector('img').src = pictureBase.url;
       bigPicture.querySelector('.likes-count').textContent = pictureBase.likes;
       bigPicture.querySelector('.comments-count').textContent = pictureBase.comments.length;
       bigPicture.querySelector('.social__caption').textContent = pictureBase.description;
-      const commentTemplate = bigPicture.querySelector('.social__comment').cloneNode(true);
-      const comments = [];
       bigPicture.querySelector('.social__comments').innerHTML = '';
-      const COMMENTS_AT_A_TIME = 5;
       const commentGroupsAmount = Math.ceil(pictureBase.comments.length / COMMENTS_AT_A_TIME);
-      const commentGroups = [];
 
       for (let counterCommentGroups = 0; counterCommentGroups < commentGroupsAmount; counterCommentGroups++) {
         commentGroups[counterCommentGroups] = pictureBase.comments.slice(counterCommentGroups * COMMENTS_AT_A_TIME, (counterCommentGroups + 1) * COMMENTS_AT_A_TIME);

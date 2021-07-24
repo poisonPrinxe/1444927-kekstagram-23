@@ -10,11 +10,12 @@ const SCALE_STEP = 25;
 const SCALE_MIN = 25;
 const SCALE_MAX = 100;
 const scaleBigger = form.querySelector('.scale__control--bigger');
+const sliderBlock = form.querySelector('.effect-level');
 const sliderElement = form.querySelector('.effect-level__slider');
 let currentEffect = 'none';
 let lastEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
-const HASHTAGS_EXPRESSION = new RegExp('^#[a-z0-9]{1,19}$', 'gmi');
+const HASHTAGS_EXPRESSION = new RegExp('^#[a-z0-9]{1,19}$', 'mi');
 
 scaleSmaller.addEventListener('click', () => {
   const valueNumber = parseInt(scaleValue.value, 10);
@@ -42,17 +43,27 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-sliderElement.style.display = 'none';
+function hideSlider () {
+  sliderBlock.style.display = 'none';
+  sliderElement.style.display = 'none';
+}
+
+function showSlider () {
+  sliderBlock.style.display = 'block';
+  sliderElement.style.display = 'block';
+}
+
+hideSlider();
 
 for (let counter = 0; counter < effects.length; counter++) {
   effects[counter].addEventListener('click', () => {
     currentEffect = effects[counter].value;
     if (currentEffect === 'none') {
-      sliderElement.style.display = 'none';
+      hideSlider();
       image.style.filter = 'none';
       image.classList.add('effects__preview--none');
     } else {
-      sliderElement.style.display = 'block';
+      showSlider();
     }
     if (currentEffect === 'chrome') {
       image.classList.add('effects__preview--chrome');
@@ -144,6 +155,8 @@ upload.addEventListener('change', () => {
 
 function closeForm () {
   upload.value = '';
+  descriptionInput.value = '';
+  hashtagsInput.value = '';
   effects[0].click();
   image.style.transform = 'scale(1)';
   scaleValue.value = `${SCALE_MAX}%`;
@@ -178,19 +191,16 @@ hashtagsInput.addEventListener('keydown', (evt) => {
 });
 
 hashtagsInput.addEventListener('change', () => {
-  const hashtags = hashtagsInput.value.split(' ');
-  console.log(hashtags);
-  if (hashtags.length <= 5) {
+  const hashtags = hashtagsInput.value.toLowerCase().split(' ');
+  if (hashtags.length < 6) {
     checking:
     for (let counter = 0; counter < hashtags.length; counter++) {
       if (HASHTAGS_EXPRESSION.test(hashtags[counter])) {
-        for (let counterSecond = counter + 1; counterSecond < hashtags.length; counterSecond++) {
-          if (!(hashtags[counter].toLowerCase() === hashtags[counterSecond].toLowerCase())) {
-            hashtagsInput.setCustomValidity('');
-          } else {
-            hashtagsInput.setCustomValidity(`Хештег ${counterSecond + 1} повторяет хештег ${counter + 1}! Один из них нужно убрать.`);
-            break checking;
-          }
+        if (hashtags.lastIndexOf(hashtags[counter]) === counter) {
+          hashtagsInput.setCustomValidity('');
+        } else {
+          hashtagsInput.setCustomValidity('Есть повторяющиеся хештеги! Нужно оставить один из них.');
+          break checking;
         }
       } else {
         hashtagsInput.setCustomValidity('Один из хештегов задан неправильно! Хештеги должны быть не длиннее 20 символов, включая решётку, и состоять из букв и цифр.');

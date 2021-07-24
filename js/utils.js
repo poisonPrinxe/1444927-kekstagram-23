@@ -9,11 +9,4 @@
 
 // getRandomInRange source: developer.mozilla.org
 
-function checkStringLength(string, maxLength) {
-  if (string.length > maxLength) {
-    return false;
-  }
-  return true;
-}
-
-export {getRandomInRange, checkStringLength};
+export {getRandomInRange};
