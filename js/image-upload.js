@@ -14,6 +14,7 @@ const sliderElement = form.querySelector('.effect-level__slider');
 let currentEffect = 'none';
 let lastEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
+const HASHTAGS_EXPRESSION = new RegExp('^#[a-z0-9]{1,19}$', 'gmi');
 
 scaleSmaller.addEventListener('click', () => {
   const valueNumber = parseInt(scaleValue.value, 10);
@@ -177,10 +178,27 @@ hashtagsInput.addEventListener('keydown', (evt) => {
 });
 
 hashtagsInput.addEventListener('change', () => {
-  if (hashtagsInput.validity.patternMismatch) {
-    hashtagsInput.setCustomValidity('Хештеги должны быть указаны в следующем формате:\n- От 0 до 5 хештегов\n- Каждый хештег начинается с #\n- Длина хештега от 2 до 20 символов, считая #\n- В тексте хештега могут быть только латинские буквы и цифры\n- Хештеги должны быть разделены пробелами');
-  } else if (hashtagsInput.validity.valid) {
-    hashtagsInput.setCustomValidity('');
+  const hashtags = hashtagsInput.value.split(' ');
+  console.log(hashtags);
+  if (hashtags.length <= 5) {
+    checking:
+    for (let counter = 0; counter < hashtags.length; counter++) {
+      if (HASHTAGS_EXPRESSION.test(hashtags[counter])) {
+        for (let counterSecond = counter + 1; counterSecond < hashtags.length; counterSecond++) {
+          if (!(hashtags[counter].toLowerCase() === hashtags[counterSecond].toLowerCase())) {
+            hashtagsInput.setCustomValidity('');
+          } else {
+            hashtagsInput.setCustomValidity(`Хештег ${counterSecond + 1} повторяет хештег ${counter + 1}! Один из них нужно убрать.`);
+            break checking;
+          }
+        }
+      } else {
+        hashtagsInput.setCustomValidity('Один из хештегов задан неправильно! Хештеги должны быть не длиннее 20 символов, включая решётку, и состоять из букв и цифр.');
+        break checking;
+      }
+    }
+  } else {
+    hashtagsInput.setCustomValidity('Слишком много хештегов! Допускается не более пяти хештегов на фотографию.');
   }
 });
 
