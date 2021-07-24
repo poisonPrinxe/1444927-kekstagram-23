@@ -116,7 +116,7 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" pattern="/^(#[a-z0-9]{1,19} ){0,4}#[a-z0-9]{1,19}$/gmi">
+                  <input class="text__hashtags" name="hashtags">
                   <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
                 </fieldset>
 
@@ -130,10 +130,10 @@
 
       <!-- Здесь будут изображения других пользователей -->
 
-    <div class="error-message hidden">
-      <h2 class="error-message__text">Возникла ошибка с загрузкой фотографий</h2>
-      <button type="button" class="error-message__hide">Понятно</button>
-    </div>
+      <div class="error-message hidden">
+        <h2 class="error-message__text">Возникла ошибка с загрузкой фотографий</h2>
+        <button type="button" class="error-message__hide">Понятно</button>
+      </div>
 
     </section>
 
