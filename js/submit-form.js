@@ -13,9 +13,6 @@ const errorClose = errorItself.querySelector('.error__button');
 successItself.classList.add('hidden');
 
 function onEscKeySuccess (evt) {
-  if (evt.defaultPrevented) {
-    return;
-  }
   switch (evt.key) {
     case 'Escape':
       closeSuccess();
@@ -39,9 +36,6 @@ function showSuccess () {
 document.body.appendChild(successItself);
 
 function onEscKeyError (evt) {
-  if (evt.defaultPrevented) {
-    return;
-  }
   switch (evt.key) {
     case 'Escape':
       closeError();
