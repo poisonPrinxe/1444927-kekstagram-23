@@ -11,9 +11,18 @@ const errorItself = errorFragment.querySelector('.error');
 const errorClose = errorItself.querySelector('.error__button');
 
 successItself.classList.add('hidden');
-successClose.addEventListener('click', () => {
+
+function showSuccess () {
+  successItself.classList.remove('hidden');
+  window.addEventListener('keydown', onEscKeySuccess);
+  successClose.addEventListener('click', closeSuccess);
+}
+
+function closeSuccess () {
   successItself.classList.add('hidden');
-});
+  window.removeEventListener('keydown', onEscKeySuccess);
+  successClose.removeEventListener('click', closeSuccess);
+}
 
 document.body.appendChild(successItself);
 
@@ -22,31 +31,43 @@ errorClose.addEventListener('click', () => {
   errorItself.classList.add('hidden');
 });
 
+function showError () {
+  errorItself.classList.remove('hidden');
+  window.addEventListener('keydown', onEscKeyError);
+  errorClose.addEventListener('click', closeError);
+}
+
+function closeError () {
+  errorItself.classList.add('hidden');
+  window.removeEventListener('keydown', onEscKeyError);
+  errorClose.removeEventListener('click', closeError);
+}
+
 document.body.appendChild(errorItself);
 
-window.addEventListener('keydown', (evt) => {
-  if (!successItself.classList.contains('hidden')) {
-    if (evt.defaultPrevented) {
-      return;
-    }
-    switch (evt.key) {
-      case 'Escape':
-        successItself.classList.add('hidden');
-        break;
-    }
-    evt.preventDefault();
-  } else if (!errorItself.classList.contains('hidden')) {
-    if (evt.defaultPrevented) {
-      return;
-    }
-    switch (evt.key) {
-      case 'Escape':
-        errorItself.classList.add('hidden');
-        break;
-    }
-    evt.preventDefault();
+function onEscKeySuccess (evt) {
+  if (evt.defaultPrevented) {
+    return;
   }
-});
+  switch (evt.key) {
+    case 'Escape':
+      closeSuccess();
+      break;
+  }
+  evt.preventDefault();
+}
+
+function onEscKeyError (evt) {
+  if (evt.defaultPrevented) {
+    return;
+  }
+  switch (evt.key) {
+    case 'Escape':
+      errorItself.classList.add('hidden');
+      break;
+  }
+  evt.preventDefault();
+}
 
 const submitForm = (onSuccess) => {
   formItself.addEventListener('submit', (evt) => {
@@ -63,10 +84,10 @@ const submitForm = (onSuccess) => {
     )
       .then(() => {
         onSuccess();
-        successItself.classList.remove('hidden');
+        showSuccess();
       })
       .catch(() => {
-        errorItself.classList.remove('hidden');
+        showError;
       });
   });
 };
