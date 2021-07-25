@@ -12,6 +12,18 @@ const errorClose = errorItself.querySelector('.error__button');
 
 successItself.classList.add('hidden');
 
+function onEscKeySuccess (evt) {
+  if (evt.defaultPrevented) {
+    return;
+  }
+  switch (evt.key) {
+    case 'Escape':
+      closeSuccess();
+      break;
+  }
+  evt.preventDefault();
+}
+
 function showSuccess () {
   successItself.classList.remove('hidden');
   window.addEventListener('keydown', onEscKeySuccess);
@@ -25,6 +37,18 @@ function closeSuccess () {
 }
 
 document.body.appendChild(successItself);
+
+function onEscKeyError (evt) {
+  if (evt.defaultPrevented) {
+    return;
+  }
+  switch (evt.key) {
+    case 'Escape':
+      errorItself.classList.add('hidden');
+      break;
+  }
+  evt.preventDefault();
+}
 
 errorItself.classList.add('hidden');
 errorClose.addEventListener('click', () => {
@@ -44,30 +68,6 @@ function closeError () {
 }
 
 document.body.appendChild(errorItself);
-
-function onEscKeySuccess (evt) {
-  if (evt.defaultPrevented) {
-    return;
-  }
-  switch (evt.key) {
-    case 'Escape':
-      closeSuccess();
-      break;
-  }
-  evt.preventDefault();
-}
-
-function onEscKeyError (evt) {
-  if (evt.defaultPrevented) {
-    return;
-  }
-  switch (evt.key) {
-    case 'Escape':
-      errorItself.classList.add('hidden');
-      break;
-  }
-  evt.preventDefault();
-}
 
 const submitForm = (onSuccess) => {
   formItself.addEventListener('submit', (evt) => {
