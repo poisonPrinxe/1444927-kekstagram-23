@@ -148,10 +148,14 @@ sliderElement.noUiSlider.on('update', (underscore, handle, unencoded) => {
   }
 });
 
-upload.addEventListener('change', () => {
-  form.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-});
+function onEscKeyForm (evt) {
+  switch (evt.key) {
+    case 'Escape':
+      closeForm();
+      break;
+  }
+  evt.preventDefault();
+}
 
 function closeForm () {
   upload.value = '';
@@ -162,24 +166,15 @@ function closeForm () {
   scaleValue.value = `${SCALE_MAX}%`;
   form.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  window.removeEventListener('keydown', onEscKeyForm);
+  closeButton.removeEventListener('click', closeForm);
 }
 
-closeButton.addEventListener('click', () => {
-  closeForm();
-});
-
-window.addEventListener('keydown', (evt) => {
-  if (!form.classList.contains('hidden')) {
-    if (evt.defaultPrevented) {
-      return;
-    }
-    switch (evt.key) {
-      case 'Escape':
-        closeForm();
-        break;
-    }
-    evt.preventDefault();
-  }
+upload.addEventListener('change', () => {
+  form.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  window.addEventListener('keydown', onEscKeyForm);
+  closeButton.addEventListener('click', closeForm);
 });
 
 descriptionInput.addEventListener('keydown', (evt) => {

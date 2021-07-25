@@ -59,32 +59,29 @@ function putPicturesOnWebsite (pictures) {
       loadComments();
       commentsLoader.addEventListener('click', loadComments);
 
-      document.body.classList.add('modal-open');
-
       function closeBigPicture () {
         bigPicture.classList.add('hidden');
         document.body.classList.remove('modal-open');
         commentsLoader.classList.remove('hidden');
         commentsLoader.removeEventListener('click', loadComments);
         bigPicture.querySelector('.cancel').removeEventListener('click', closeBigPicture);
+        window.removeEventListener('keydown', onEscKeyPicture);
       }
 
       bigPicture.querySelector('.cancel').addEventListener('click', closeBigPicture);
 
-      window.addEventListener('keydown', (evt) => {
-        if (!bigPicture.classList.contains('hidden')) {
-          if (evt.defaultPrevented) {
-            return;
-          }
-          switch (evt.key) {
-            case 'Escape':
-              closeBigPicture();
-              break;
-          }
-          evt.preventDefault();
+      function onEscKeyPicture (evt) {
+        switch (evt.key) {
+          case 'Escape':
+            closeBigPicture();
+            break;
         }
-      });
+        evt.preventDefault();
+      }
 
+      window.addEventListener('keydown', onEscKeyPicture);
+
+      document.body.classList.add('modal-open');
       bigPicture.classList.remove('hidden');
 
     });
