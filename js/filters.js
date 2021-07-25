@@ -51,13 +51,15 @@ function showFilters () {
   filtersForm.addEventListener('click', debounce((evt) => {
     const currentFilter = evt.target;
 
-    clickFilter(currentFilter);
-    if (currentFilter === filterDefault) {
-      putPicturesOnWebsite(picturesFromServer);
-    } else if (currentFilter === filterRandom) {
-      putPicturesOnWebsite(getRandomPictures(picturesFromServer, RANDOMS_AMOUNT));
-    } else if (currentFilter === filterDiscussed) {
-      putPicturesOnWebsite(getDiscussedPictures(picturesFromServer));
+    if (currentFilter.classList.contains('img-filters__button')) {
+      clickFilter(currentFilter);
+      if (currentFilter === filterDefault) {
+        putPicturesOnWebsite(picturesFromServer);
+      } else if (currentFilter === filterRandom) {
+        putPicturesOnWebsite(getRandomPictures(picturesFromServer, RANDOMS_AMOUNT));
+      } else if (currentFilter === filterDiscussed) {
+        putPicturesOnWebsite(getDiscussedPictures(picturesFromServer));
+      }
     }
   }));
 }
