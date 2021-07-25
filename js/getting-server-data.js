@@ -1,3 +1,5 @@
+const errorMessage = document.querySelector('.error-message');
+
 import {putPicturesOnWebsite} from './miniatures.js';
 
 let picturesFromServer = [];
@@ -9,7 +11,6 @@ fetch('https://23.javascript.pages.academy/kekstagram/data')
     putPicturesOnWebsite(response);
   })
   .catch(() => {
-    const errorMessage = document.querySelector('.error-message');
     errorMessage.classList.remove('hidden');
     const closeErrorMessage = errorMessage.querySelector('.error-message__hide');
     closeErrorMessage.addEventListener('click', () => {
