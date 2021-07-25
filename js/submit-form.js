@@ -18,7 +18,6 @@ function onEscKeySuccess (evt) {
   }
   switch (evt.key) {
     case 'Escape':
-      /*eslint no-use-before-define: "off"*/
       closeSuccess();
       break;
   }
@@ -45,7 +44,6 @@ function onEscKeyError (evt) {
   }
   switch (evt.key) {
     case 'Escape':
-      /*eslint no-use-before-define: "off"*/
       closeError();
       break;
   }
