@@ -24,16 +24,16 @@ function onEscKeySuccess (evt) {
   evt.preventDefault();
 }
 
-function showSuccess () {
-  successItself.classList.remove('hidden');
-  window.addEventListener('keydown', onEscKeySuccess);
-  successClose.addEventListener('click', closeSuccess);
-}
-
 function closeSuccess () {
   successItself.classList.add('hidden');
   window.removeEventListener('keydown', onEscKeySuccess);
   successClose.removeEventListener('click', closeSuccess);
+}
+
+function showSuccess () {
+  successItself.classList.remove('hidden');
+  window.addEventListener('keydown', onEscKeySuccess);
+  successClose.addEventListener('click', closeSuccess);
 }
 
 document.body.appendChild(successItself);
@@ -50,21 +50,16 @@ function onEscKeyError (evt) {
   evt.preventDefault();
 }
 
-errorItself.classList.add('hidden');
-errorClose.addEventListener('click', () => {
+function closeError () {
   errorItself.classList.add('hidden');
-});
+  window.removeEventListener('keydown', onEscKeyError);
+  errorClose.removeEventListener('click', closeError);
+}
 
 function showError () {
   errorItself.classList.remove('hidden');
   window.addEventListener('keydown', onEscKeyError);
   errorClose.addEventListener('click', closeError);
-}
-
-function closeError () {
-  errorItself.classList.add('hidden');
-  window.removeEventListener('keydown', onEscKeyError);
-  errorClose.removeEventListener('click', closeError);
 }
 
 document.body.appendChild(errorItself);
