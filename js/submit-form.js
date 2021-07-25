@@ -12,22 +12,23 @@ const errorClose = errorItself.querySelector('.error__button');
 
 successItself.classList.add('hidden');
 
-function closeSuccess () {
-  successItself.classList.add('hidden');
-  window.removeEventListener('keydown', onEscKeySuccess);
-  successClose.removeEventListener('click', closeSuccess);
-}
-
 function onEscKeySuccess (evt) {
   if (evt.defaultPrevented) {
     return;
   }
   switch (evt.key) {
     case 'Escape':
+      /*eslint no-use-before-define: "off"*/
       closeSuccess();
       break;
   }
   evt.preventDefault();
+}
+
+function closeSuccess () {
+  successItself.classList.add('hidden');
+  window.removeEventListener('keydown', onEscKeySuccess);
+  successClose.removeEventListener('click', closeSuccess);
 }
 
 function showSuccess () {
@@ -38,22 +39,23 @@ function showSuccess () {
 
 document.body.appendChild(successItself);
 
-function closeError () {
-  errorItself.classList.add('hidden');
-  window.removeEventListener('keydown', onEscKeyError);
-  errorClose.removeEventListener('click', closeError);
-}
-
 function onEscKeyError (evt) {
   if (evt.defaultPrevented) {
     return;
   }
   switch (evt.key) {
     case 'Escape':
+      /*eslint no-use-before-define: "off"*/
       closeError();
       break;
   }
   evt.preventDefault();
+}
+
+function closeError () {
+  errorItself.classList.add('hidden');
+  window.removeEventListener('keydown', onEscKeyError);
+  errorClose.removeEventListener('click', closeError);
 }
 
 function showError () {
