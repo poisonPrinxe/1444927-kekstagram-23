@@ -1,4 +1,5 @@
 const filtersList = document.querySelector('.img-filters');
+const filtersForm = document.querySelector('.img-filters__form');
 const filterDefault = filtersList.querySelector('#filter-default');
 const filterRandom = filtersList.querySelector('#filter-random');
 const filterDiscussed = filtersList.querySelector('#filter-discussed');
@@ -40,31 +41,25 @@ function showFilters () {
     return picturesCopy;
   }
 
-  function filterClick (filter) {
+  function clickFilter (filter) {
     previousFilter.classList.remove('img-filters__button--active');
     filter.classList.add('img-filters__button--active');
     previousFilter = filter;
     removePicturesFromWebsite();
   }
 
-  function allFiltersClicking () {
-    filterDefault.addEventListener('click', debounce(() => {
-      filterClick(filterDefault);
+  filtersForm.addEventListener('click', debounce((evt) => {
+    const currentFilter = evt.target;
+
+    clickFilter(currentFilter);
+    if (currentFilter === filterDefault) {
       putPicturesOnWebsite(picturesFromServer);
-    }));
-
-    filterRandom.addEventListener('click', debounce(() => {
-      filterClick(filterRandom);
+    } else if (currentFilter === filterRandom) {
       putPicturesOnWebsite(getRandomPictures(picturesFromServer, RANDOMS_AMOUNT));
-    }));
-
-    filterDiscussed.addEventListener('click', debounce(() => {
-      filterClick(filterDiscussed);
+    } else if (currentFilter === filterDiscussed) {
       putPicturesOnWebsite(getDiscussedPictures(picturesFromServer));
-    }));
-  }
-
-  allFiltersClicking();
+    }
+  }));
 }
 
 export {showFilters};
