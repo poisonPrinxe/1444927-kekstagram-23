@@ -706,6 +706,10 @@ main {
   border-radius: 5px;
 }
 
+.text--wrong {
+  border-color: tomato;
+}
+
 
 /**
  * Кнопка для отправки изображения
