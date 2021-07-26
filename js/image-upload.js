@@ -15,7 +15,9 @@ const sliderElement = form.querySelector('.effect-level__slider');
 let currentEffect = 'none';
 let lastEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
+const effectDefault = form.querySelector('#effect-none');
 const HASHTAGS_EXPRESSION = new RegExp('^#[a-z0-9]{1,19}$', 'mi');
+const HASHTAGS_AMOUNT = 5;
 
 scaleSmaller.addEventListener('click', () => {
   const valueNumber = parseInt(scaleValue.value, 10);
@@ -161,7 +163,7 @@ function closeForm () {
   upload.value = '';
   descriptionInput.value = '';
   hashtagsInput.value = '';
-  effects[0].click();
+  effectDefault.click();
   image.style.transform = 'scale(1)';
   scaleValue.value = `${SCALE_MAX}%`;
   form.classList.add('hidden');
@@ -185,25 +187,40 @@ hashtagsInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
+descriptionInput.addEventListener('change', () => {
+  if (descriptionInput.validity.tooLong) {
+    descriptionInput.classList.add('text--wrong');
+  } else {
+    descriptionInput.classList.remove('text--wrong');
+  }
+});
+
 hashtagsInput.addEventListener('change', () => {
   const hashtags = hashtagsInput.value.toLowerCase().split(' ');
-  if (hashtags.length < 6) {
+  if (hashtagsInput.value === '') {
+    hashtagsInput.setCustomValidity('');
+    hashtagsInput.classList.remove('text--wrong');
+  } else if (hashtags.length <= HASHTAGS_AMOUNT) {
     checking:
     for (let counter = 0; counter < hashtags.length; counter++) {
       if (HASHTAGS_EXPRESSION.test(hashtags[counter])) {
         if (hashtags.lastIndexOf(hashtags[counter]) === counter) {
           hashtagsInput.setCustomValidity('');
+          hashtagsInput.classList.remove('text--wrong');
         } else {
           hashtagsInput.setCustomValidity('Есть повторяющиеся хештеги! Нужно оставить один из них.');
+          hashtagsInput.classList.add('text--wrong');
           break checking;
         }
       } else {
         hashtagsInput.setCustomValidity('Один из хештегов задан неправильно! Хештеги должны быть не длиннее 20 символов, включая решётку, и состоять из букв и цифр.');
+        hashtagsInput.classList.add('text--wrong');
         break checking;
       }
     }
   } else {
-    hashtagsInput.setCustomValidity('Слишком много хештегов! Допускается не более пяти хештегов на фотографию.');
+    hashtagsInput.setCustomValidity(`Слишком много хештегов! Допускается не более ${HASHTAGS_AMOUNT} хештегов на фотографию.`);
+    hashtagsInput.classList.add('text--wrong');
   }
 });
 

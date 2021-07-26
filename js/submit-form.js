@@ -33,6 +33,7 @@ function showSuccess () {
   successClose.addEventListener('click', closeSuccess);
 }
 
+successItself.classList.add('hidden');
 document.body.appendChild(successItself);
 
 function onEscKeyError (evt) {
@@ -56,6 +57,7 @@ function showError () {
   errorClose.addEventListener('click', closeError);
 }
 
+errorItself.classList.add('hidden');
 document.body.appendChild(errorItself);
 
 const submitForm = (onSuccess) => {
