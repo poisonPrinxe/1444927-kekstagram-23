@@ -13,10 +13,8 @@ const errorClose = errorItself.querySelector('.error__button');
 successItself.classList.add('hidden');
 
 function onEscKeySuccess (evt) {
-  switch (evt.key) {
-    case 'Escape':
-      closeSuccess();
-      break;
+  if (evt.key === 'Escape') {
+    closeSuccess();
   }
   evt.preventDefault();
 }
@@ -37,10 +35,8 @@ successItself.classList.add('hidden');
 document.body.appendChild(successItself);
 
 function onEscKeyError (evt) {
-  switch (evt.key) {
-    case 'Escape':
-      closeError();
-      break;
+  if (evt.key === 'Escape') {
+    closeError();
   }
   evt.preventDefault();
 }

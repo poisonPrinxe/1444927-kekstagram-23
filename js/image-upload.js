@@ -151,10 +151,8 @@ sliderElement.noUiSlider.on('update', (underscore, handle, unencoded) => {
 });
 
 function onEscKeyForm (evt) {
-  switch (evt.key) {
-    case 'Escape':
-      closeForm();
-      break;
+  if (evt.key === 'Escape') {
+    closeForm();
   }
   evt.preventDefault();
 }

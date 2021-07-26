@@ -71,10 +71,8 @@ function putPicturesOnWebsite (pictures) {
       bigPicture.querySelector('.cancel').addEventListener('click', closeBigPicture);
 
       function onEscKeyPicture (evt) {
-        switch (evt.key) {
-          case 'Escape':
-            closeBigPicture();
-            break;
+        if (evt.key === 'Escape') {
+          closeBigPicture();
         }
         evt.preventDefault();
       }

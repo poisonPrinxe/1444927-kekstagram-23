@@ -1,4 +1,4 @@
-import './image-upload.js';
+﻿import './image-upload.js';
 import {closeForm} from './image-upload.js';
 import './getting-server-data.js';
 import './submit-form.js';
