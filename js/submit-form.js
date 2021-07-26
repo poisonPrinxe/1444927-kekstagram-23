@@ -75,6 +75,6 @@ function submitForm (onSuccess) {
         showError;
       });
   });
-};
+}
 
 export {submitForm};
