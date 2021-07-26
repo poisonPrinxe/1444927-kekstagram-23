@@ -1,4 +1,10 @@
-﻿const upload = document.querySelector('#upload-file');
+﻿const SCALE_STEP = 25;
+const SCALE_MIN = 25;
+const SCALE_MAX = 100;
+const HASHTAGS_EXPRESSION = new RegExp('^#[a-z0-9]{1,19}$', 'mi');
+const HASHTAGS_AMOUNT = 5;
+
+const upload = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__overlay');
 const image = form.querySelector('.preview-image');
 const closeButton = form.querySelector('.img-upload__cancel');
@@ -6,18 +12,14 @@ const descriptionInput = form.querySelector('.text__description');
 const hashtagsInput = form.querySelector('.text__hashtags');
 const scaleValue = form.querySelector('.scale__control--value');
 const scaleSmaller = form.querySelector('.scale__control--smaller');
-const SCALE_STEP = 25;
-const SCALE_MIN = 25;
-const SCALE_MAX = 100;
 const scaleBigger = form.querySelector('.scale__control--bigger');
 const sliderBlock = form.querySelector('.effect-level');
 const sliderElement = form.querySelector('.effect-level__slider');
-let currentEffect = 'none';
-let lastEffect = 'none';
 const effects = form.querySelectorAll('.effects__radio');
 const effectDefault = form.querySelector('#effect-none');
-const HASHTAGS_EXPRESSION = new RegExp('^#[a-z0-9]{1,19}$', 'mi');
-const HASHTAGS_AMOUNT = 5;
+
+let currentEffect = 'none';
+let lastEffect = 'none';
 
 scaleSmaller.addEventListener('click', () => {
   const valueNumber = parseInt(scaleValue.value, 10);
@@ -153,8 +155,8 @@ sliderElement.noUiSlider.on('update', (underscore, handle, unencoded) => {
 function onEscKeyForm (evt) {
   if (evt.key === 'Escape') {
     closeForm();
+    evt.preventDefault();
   }
-  evt.preventDefault();
 }
 
 function closeForm () {

@@ -10,13 +10,11 @@ const errorFragment = errorTemplate.content.cloneNode(true);
 const errorItself = errorFragment.querySelector('.error');
 const errorClose = errorItself.querySelector('.error__button');
 
-successItself.classList.add('hidden');
-
 function onEscKeySuccess (evt) {
   if (evt.key === 'Escape') {
     closeSuccess();
+    evt.preventDefault();
   }
-  evt.preventDefault();
 }
 
 function closeSuccess () {
@@ -37,8 +35,8 @@ document.body.appendChild(successItself);
 function onEscKeyError (evt) {
   if (evt.key === 'Escape') {
     closeError();
+    evt.preventDefault();
   }
-  evt.preventDefault();
 }
 
 function closeError () {
@@ -56,7 +54,7 @@ function showError () {
 errorItself.classList.add('hidden');
 document.body.appendChild(errorItself);
 
-const submitForm = (onSuccess) => {
+function submitForm (onSuccess) {
   formItself.addEventListener('submit', (evt) => {
     evt.preventDefault();
 

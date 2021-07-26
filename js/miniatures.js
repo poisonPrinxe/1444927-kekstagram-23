@@ -1,3 +1,5 @@
+const COMMENTS_AT_A_TIME = 5;
+
 const imageTemplate = document.querySelector('#picture');
 const picturesOnWebsite = [];
 const fragment = document.createDocumentFragment();
@@ -5,7 +7,6 @@ const picturesBlock = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const comments = [];
-const COMMENTS_AT_A_TIME = 5;
 const commentGroups = [];
 const commentTemplate = bigPicture.querySelector('.social__comment').cloneNode(true);
 
@@ -73,8 +74,8 @@ function putPicturesOnWebsite (pictures) {
       function onEscKeyPicture (evt) {
         if (evt.key === 'Escape') {
           closeBigPicture();
+          evt.preventDefault();
         }
-        evt.preventDefault();
       }
 
       window.addEventListener('keydown', onEscKeyPicture);

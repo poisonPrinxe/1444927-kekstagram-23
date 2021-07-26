@@ -1,6 +1,6 @@
-const errorMessage = document.querySelector('.error-message');
-
 import {putPicturesOnWebsite} from './miniatures.js';
+
+const errorMessage = document.querySelector('.error-message');
 
 let picturesFromServer = [];
 

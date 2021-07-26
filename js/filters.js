@@ -1,14 +1,15 @@
+import {getRandomInRange} from './utils.js';
+import {putPicturesOnWebsite, removePicturesFromWebsite} from './miniatures.js';
+import {picturesFromServer} from './getting-server-data.js';
+import {debounce} from './utils/debounce.js';
+
+const RANDOMS_AMOUNT = 10;
+
 const filtersList = document.querySelector('.img-filters');
 const filtersForm = document.querySelector('.img-filters__form');
 const filterDefault = filtersList.querySelector('#filter-default');
 const filterRandom = filtersList.querySelector('#filter-random');
 const filterDiscussed = filtersList.querySelector('#filter-discussed');
-const RANDOMS_AMOUNT = 10;
-
-import {getRandomInRange} from './utils.js';
-import {putPicturesOnWebsite, removePicturesFromWebsite} from './miniatures.js';
-import {picturesFromServer} from './getting-server-data.js';
-import {debounce} from './utils/debounce.js';
 
 function showFilters () {
   filtersList.classList.remove('img-filters--inactive');
